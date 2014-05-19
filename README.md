@@ -3,9 +3,22 @@ yet-another-ng-paginator
 
 Yet another Angular pagination lib
 
-Usage:
+# Install:
+```
+npm install
+```
+```
+bower install
+```
 
-<paginator data="data source to be paginated" page-size="page item numbers" page-data="currentPageData(pageData)"></paginator>
+# Usage:
+
+<paginator data="data source to be paginated" page-size="items per page" page-data="getPageData(pageData)"></paginator>
+
+# Test:
+```
+./node_modules/karma/bin/karma start
+```
 
 The MIT License (MIT)
 
