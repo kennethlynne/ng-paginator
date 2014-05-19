@@ -83,7 +83,7 @@ angular.module('YAngPaginator', [])
       scope: {
         data: '=',
         pageSize: '=',
-        pageData: '&' // exports to parent dom for current page data show
+        pageData: '&' // exports to parent scope for current page data show
       },
       templateUrl: 'paginator.html',
       controller: ['$scope', '$element', function ($scope, $elem) {
