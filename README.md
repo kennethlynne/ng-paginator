@@ -16,6 +16,11 @@ bower install
 ```
   <paginator data="data source to be paginated" page-size="items per page" page-data="getPageData(pageData)"></paginator>
 ```
+## attributes:
+1.  data: parent scope data bind for pagination
+2.  page-size: items count per page, defaults to 20
+3.  page-data: parent scope method to bind for exporting current page data
+
 
 # Test:
 ```
