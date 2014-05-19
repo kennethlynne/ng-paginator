@@ -13,7 +13,9 @@ bower install
 
 # Usage:
 
-<paginator data="data source to be paginated" page-size="items per page" page-data="getPageData(pageData)"></paginator>
+```
+  <paginator data="data source to be paginated" page-size="items per page" page-data="getPageData(pageData)"></paginator>
+```
 
 # Test:
 ```
