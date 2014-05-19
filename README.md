@@ -3,7 +3,9 @@ yet-another-ng-paginator
 
 Yet another Angular pagination lib
 
+Usage:
 
+<paginator data="data source to be paginated" page-size="page item numbers" current-page-data="reference to current page data"></paginator>
 
 The MIT License (MIT)
 
