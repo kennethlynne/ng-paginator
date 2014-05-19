@@ -12,16 +12,6 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
-
-    ngHtml2JsPreprocessor: {
-      // strip this from the file path
-      //stripPrefix: 'app/',
-      prependPrefix: '/',
-      // setting this option will create only a single module that contains templates
-      // from all the files, so you can load them all with module('foo')
-      moduleName: 'foo'
-    },
-
     // list of files / patterns to load in the browser
     files: [
       'bower_components/angular/angular.js',
@@ -37,10 +27,17 @@ module.exports = function(config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
+    preprocessors : {
+      'paginator.html': ['ng-html2js']
     },
 
-
+    ngHtml2JsPreprocessor: {
+      // strip this from the file path
+      //stripPrefix: 'app/',
+      // setting this option will create only a single module that contains templates
+      // from all the files, so you can load them all with module('foo')
+      moduleName: 'foo'
+    },
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -66,7 +63,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode

@@ -8,8 +8,8 @@ angular.module('YAngPaginator', [])
       this.pages = [];
       this.currentPageData = [];
       this.pageSize = cfg && cfg.pageSize ? cfg.pageSize : 20;
-      this.setData(cfg && cfg.data || []);
       this.currentPage = 1;
+      this.setData(cfg && cfg.data || []);
     }
 
     Paginator.prototype.next = function () {
@@ -29,6 +29,7 @@ angular.module('YAngPaginator', [])
     Paginator.prototype.setPage = function (page) {
       var paginator = this;
       paginator.currentPage = page;
+      paginator.getPaginatedData();
     };
 
     Paginator.prototype.getCurrentPageNumber = function () {
@@ -82,16 +83,19 @@ angular.module('YAngPaginator', [])
       scope: {
         data: '=',
         pageSize: '=',
-        currentPageData: '=' // exports to parent dom for current page data show
+        pageData: '&' // exports to parent dom for current page data show
       },
       templateUrl: 'paginator.html',
       controller: ['$scope', '$element', function ($scope, $elem) {
         function _pagination() {
-          $scope._pg = new Paginator({
+          $scope.paginator = new Paginator({
             data: $scope.data,
             pageSize: $scope.pageSize
           });
-          $scope.currentPageData = $scope._pg.currentPageData;
+          // update current page data in parent scope
+          $scope.$watch('paginator.currentPageData', function() {
+            $scope.pageData({pageData: $scope.paginator.currentPageData})
+          });
         }
 
         $scope.$watch('data', _pagination);
