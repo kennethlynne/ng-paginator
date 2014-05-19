@@ -1,21 +1,7 @@
 'use strict';
 
 angular.module('YAngPaginator', [])
-  .controller('paginatorComponentCtrl', function ($scope, Paginator, $log) {
-    if (!$scope.paginator instanceof Paginator) {
-      $log.error($scope.paginator, 'is not a valid Paginator');
-    }
-  })
   .directive('paginator', function () {
-    return {
-      restrict: 'E',
-      scope: {
-        paginator: '='
-      },
-      controller: 'paginatorComponentCtrl'
-    };
-  })
-  .factory('Paginator', function () {
 
     function Paginator(cfg) {
       this.data = [];
@@ -91,5 +77,24 @@ angular.module('YAngPaginator', [])
       return paginator.getCurrentPageNumber() < paginator.getNumberOfPages();
     };
 
-    return Paginator;
+    return {
+      restrict: 'E',
+      scope: {
+        data: '=',
+        pageSize: '=',
+        currentPageData: '=' // exports to parent dom for current page data show
+      },
+      templateUrl: 'paginator.html',
+      controller: ['$scope', '$element', function ($scope, $elem) {
+        function _pagination() {
+          $scope._pg = new Paginator({
+            data: $scope.data,
+            pageSize: $scope.pageSize
+          });
+          $scope.currentPageData = $scope._pg.currentPageData;
+        }
+
+        $scope.$watch('data', _pagination);
+      }]
+    };
   });
