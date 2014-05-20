@@ -50,7 +50,7 @@ angular.module('yourApp')
 
 ```
 npm install
-karma start
+grunt
 ```
 
 ========================

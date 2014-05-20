@@ -35,8 +35,10 @@ module.exports = function(grunt) {
             // Used in local development
             local: {
                 configFile: '<%= test.karmaConfig %>',
+            },
+            release: {
+                configFile: '<%= test.karmaConfig %>',
                 singleRun: true,
-                //browsers: ['Chrome']
             }
         },
 
@@ -50,21 +52,20 @@ module.exports = function(grunt) {
             },
         },
 
-        // html2js: {
-        //     options: {
-        //         base: '',
-        //         module: 'paginatorTemplates'
-        //     },
-        //     main: {
-        //         src: "<%= src.templates %>",
-        //         dest: "<%= builddir %>/templates.js"
-        //     }
-        // },
-
         concat: {
             dist: {
                 src: ['<%= src.js %>'],
                 dest: '<%= distdir %>/<%= pkg.name %>.js'
+            }
+        },
+
+        connect: {
+            web: {
+                options: {
+                    port: 9000,
+                    bases: '.',
+                    keepalive: true
+                }
             }
         }
     };
@@ -75,6 +76,7 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.registerTask('default', ['jshint', 'karma:local']);
-    grunt.registerTask('release', ['jshint', 'karma:local', 'ngtemplates', 'concat']);
+    grunt.registerTask('demo', ['release', 'connect:web']);
+    grunt.registerTask('release', ['jshint', 'karma:release', 'ngtemplates', 'concat']);
 
 };
