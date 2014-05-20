@@ -1,8 +1,33 @@
 'use strict';
 
 angular.module('YAngPaginator', [])
-  .directive('paginator', function () {
+  .directive('paginator', ['PG', function (PG) {
 
+    return {
+      restrict: 'E',
+      scope: {
+        data: '=',
+        pageSize: '=',
+        pageData: '&' // exports to parent scope for current page data show
+      },
+      templateUrl: 'paginator.html',
+      controller: ['$scope', '$element', function ($scope, $elem) {
+        function _pagination() {
+          $scope.paginator = new PG({
+            data: $scope.data,
+            pageSize: $scope.pageSize
+          });
+          // update current page data in parent scope
+          $scope.$watch('paginator.currentPageData', function() {
+            $scope.pageData({pageData: $scope.paginator.currentPageData})
+          });
+        }
+
+        $scope.$watch('data', _pagination);
+      }]
+    };
+  }])
+  .factory('PG', function () {
     function Paginator(cfg) {
       this.data = [];
       this.pages = [];
@@ -78,27 +103,5 @@ angular.module('YAngPaginator', [])
       return paginator.getCurrentPageNumber() < paginator.getNumberOfPages();
     };
 
-    return {
-      restrict: 'E',
-      scope: {
-        data: '=',
-        pageSize: '=',
-        pageData: '&' // exports to parent scope for current page data show
-      },
-      templateUrl: 'paginator.html',
-      controller: ['$scope', '$element', function ($scope, $elem) {
-        function _pagination() {
-          $scope.paginator = new Paginator({
-            data: $scope.data,
-            pageSize: $scope.pageSize
-          });
-          // update current page data in parent scope
-          $scope.$watch('paginator.currentPageData', function() {
-            $scope.pageData({pageData: $scope.paginator.currentPageData})
-          });
-        }
-
-        $scope.$watch('data', _pagination);
-      }]
-    };
+    return Paginator;
   });
