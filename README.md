@@ -53,6 +53,8 @@ npm install
 grunt
 ```
 
+To run unit tests:  `grunt ` this will run `jshint` and `karma`
+
 ========================
 
 The MIT License (MIT)

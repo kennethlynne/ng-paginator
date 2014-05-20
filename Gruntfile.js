@@ -45,7 +45,7 @@ module.exports = function(grunt) {
         ngtemplates: {
             ngPaginatorPlz: {
                 src: ['<%= src.templates %>'],
-                dest: '<%= builddir %>/custom_angular.js',
+                dest: '<%= builddir %>/ngPaginator_templates.js',
                 options: {
                     concat: 'dist'
                 }
