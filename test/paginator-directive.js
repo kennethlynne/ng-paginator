@@ -21,14 +21,19 @@ describe('Directive: paginator', function () {
   });
 
   it('pagination should init correctly', function () {
+    var lis;
     element = angular.element('<paginator data="source" page-size="5" page-data="getPageData(pageData)"></paginator>');
     element = $compile(element)(parentScope);
     parentScope.$digest();
+    lis = element.find('li');
     scope = element.children().scope();
     // pagination data ok
     expect(scope.paginator.data.length).toBe(9);
     expect(scope.paginator.pages.length).toBe(2);
     expect(scope.paginator.currentPage).toBe(1);
+    // template rendering test
+    expect(lis.length).toBe(4);
+    expect(lis.eq(1).text().trim()).toBe('1')
     // parent scope page data init ok
     expect(parentScope.currentPageData.length).toBe(5);
     expect(parentScope.currentPageData[0]).toBe(1);
