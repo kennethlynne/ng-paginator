@@ -7,11 +7,14 @@ angular.module('YAngPaginator', [])
       restrict: 'E',
       scope: {
         data: '=',
-        pageSize: '=',
+        pageSize: '@',
         pageData: '&' // exports to parent scope for current page data show
       },
       templateUrl: 'paginator.html',
       controller: ['$scope', '$element', function ($scope, $elem) {
+        // set page size
+        $scope.pageSize = Number($scope.pageSize || 20);
+
         function _pagination() {
           $scope.paginator = new PG({
             data: $scope.data,

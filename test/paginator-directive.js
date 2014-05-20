@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: paginatorComponent', function () {
+describe('Directive: paginator', function () {
   var element, scope, parentScope, $compile;
 
   beforeEach(function () {
